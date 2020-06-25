@@ -1,0 +1,12 @@
+{
+  "name": "assignment-7-iic3585",
+  "version": "1.0.0",
+  "description": "Web components assignment",
+  "main": "index.js",
+  "repository": "https://github.com/diflores/assignment-7-iic3585",
+  "author": "Daniela Flores and Javiera Jorquera",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "serve": "^11.3.0"
+  }
+}

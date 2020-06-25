@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku Solver (WASM)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="title-container">
+    <h1>Sudoku Solver (with WASM)</h1>
+  </div>
+  <div id="time-elapsed-container">
+    <h3 id="time-elapsed-pre-text"></h3>
+    <h3 id="time-elapsed-text"></h3>
+  </div>
+  <div id="sudoku-container">
+    <table>
+      <tr id="row-0">
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-0"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-1"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-2"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-3"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-4"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-5"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-6"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-7"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-8"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+      </tr>
+      <tr id="row-1">
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-9"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-10"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-11"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-12"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-13"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-14"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-15"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-16"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-17"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+      </tr>
+      <tr id="row-2">
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-18"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-19"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-20"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-21"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-22"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-23"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-24"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-25"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-26"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+      </tr>
+      <tr id="row-3">
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-27"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-28"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-29"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-30"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-31"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-32"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-33"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-34"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-35"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+      </tr>
+      <tr id="row-4">
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-36"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-37"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-38"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-39"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-40"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-41"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-42"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-43"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-44"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+      </tr>
+      <tr id="row-5">
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-45"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-46"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-47"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-48"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-49"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-50"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-51"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-52"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-53"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+      </tr>
+      <tr id="row-6">
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-54"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-55"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-56"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-57"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-58"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-59"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-60"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-61"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-62"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+      </tr>
+      <tr id="row-7">
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-63"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-64"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-65"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-66"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-67"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-68"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-69"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-70"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-71"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+      </tr>
+      <tr id="row-8">
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-72"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-73"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-74"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-75"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-76"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-77"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-78"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-79"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+        <td><input type="text" pattern="\d*" maxlength=1 min="0" max="9" id="cell-80"
+            oninput="this.value=this.value.replace(/[a-zA-Z]+/g,'');"></td>
+      </tr>
+    </table>
+  </div>
+  <div id="buttons-container">
+    <button onclick="solve()" class="button" id="solve-button">Solve</button>
+    <button onclick="clearGrid()" class="button">Clear</button>
+  </div>
+  <script src="sudoku_assets/sudoku.js"></script>
+  <script src="sudoku_assets/wasm_sudoku.js"></script>
+</body>
+
+</html>
