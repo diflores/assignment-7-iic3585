@@ -2,13 +2,22 @@
   "name": "assignment-7-iic3585",
   "version": "1.0.0",
   "description": "Web components assignment",
-  "main": "index.js",
   "repository": "https://github.com/diflores/assignment-7-iic3585",
   "author": "Daniela Flores and Javiera Jorquera",
   "license": "Apache-2.0",
+  "scripts": {
+    "serve": "webpack-dev-server",
+    "build": "webpack --mode=development"
+  },
   "dependencies": {
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
-    "serve": "^11.3.0"
+    "serve": "^11.3.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   }
 }
