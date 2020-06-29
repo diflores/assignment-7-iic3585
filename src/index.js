@@ -4,6 +4,7 @@ import { parseResults } from "../utils";
 let filterValues = {
   genre: '',
   year: '',
+  certification: '',
 };
 
 const appendMovies = (movies) => {
@@ -30,6 +31,10 @@ const getMovies = () => {
   }
   if (filterValues.year) {
     params.year = filterValues.year;
+  }
+  if (filterValues.certification) {
+    params.certification_country = 'US';
+    params.certification = filterValues.certification;
   }
   axios({
     url: 'https://api.themoviedb.org/3/discover/movie',
@@ -83,7 +88,26 @@ axios({
 
 // agregar filtro por año
 const yearOptions = [...Array(10)].map((_, index) => ({ value: 2020 - index, text: 2020 - index }));
-appendFilter(yearOptions, 'year');
+const yearsWithEmptyOption = [{ text: 'All years', value: '' }].concat(yearOptions);
+appendFilter(yearsWithEmptyOption, 'year');
+
+// agregar filtro por certificación
+axios({
+  url: 'https://api.themoviedb.org/3/certification/movie/list',
+  params: {
+    api_key: '6ef8f15c4d654724af2bc133947a5693',
+  },
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8',
+  },
+  method: 'GET',
+}).then((response) => {
+  const certifications = response.data.certifications.US.map(
+    (certification) => ({ text: certification.certification, value: certification.certification }),
+  );
+  const certificationsWithEmptyOption = [{ text: 'All certifications', value: '' }].concat(certifications);
+  appendFilter(certificationsWithEmptyOption, 'certification');
+}).catch((error) => console.log(error));
 
 // obtener películas iniciales
 getMovies();
