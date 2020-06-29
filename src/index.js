@@ -19,6 +19,29 @@ const appendMovies = (movies) => {
   });
 };
 
+let genreSelected = '';
+
+const getMovies = () => {
+  const params = {
+    api_key: '6ef8f15c4d654724af2bc133947a5693',
+    sort_by: 'popularity.desc',
+  };
+  if (genreSelected) {
+    params.with_genres = genreSelected;
+  }
+  axios({
+    url: 'https://api.themoviedb.org/3/discover/movie',
+    params,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    method: 'GET',
+  }).then((response) => {
+    const movies = parseResults(response);
+    appendMovies(movies);
+  }).catch((error) => console.log(error));
+};
+
 const appendFilter = (options) => {
   const filtersList = document.getElementById('filters');
   const fragment = document.getElementById('filter-template');
@@ -33,6 +56,10 @@ const appendFilter = (options) => {
     filterSelect.appendChild(optionElement);
   });
 
+  filterSelect.addEventListener('change', (event) => {
+    genreSelected = filterSelect.options[filterSelect.selectedIndex].value;
+    getMovies();
+  });
   filtersList.append(filterInstance);
 };
 
@@ -51,17 +78,4 @@ axios({
   appendFilter(genresWithEmptyOption);
 }).catch((error) => console.log(error));
 
-axios({
-  url: 'https://api.themoviedb.org/3/discover/movie',
-  params: {
-    api_key: '6ef8f15c4d654724af2bc133947a5693',
-    sort_by: 'popularity.desc',
-  },
-  headers: {
-    'Content-Type': 'application/json;charset=utf-8',
-  },
-  method: 'GET',
-}).then((response) => {
-  const movies = parseResults(response);
-  appendMovies(movies);
-}).catch((error) => console.log(error));
+getMovies();
