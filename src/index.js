@@ -47,7 +47,8 @@ axios({
   method: 'GET',
 }).then((response) => {
   const genres = response.data.genres.map((genre) => ({ text: genre.name, value: genre.id }));
-  appendFilter(genres);
+  const genresWithEmptyOption = [{ text: 'All genres', value: '' }].concat(genres);
+  appendFilter(genresWithEmptyOption);
 }).catch((error) => console.log(error));
 
 axios({
