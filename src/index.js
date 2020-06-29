@@ -19,6 +19,37 @@ const appendMovies = (movies) => {
   });
 };
 
+const appendFilter = (options) => {
+  const filtersList = document.getElementById('filters');
+  const fragment = document.getElementById('filter-template');
+  const filterInstance = document.importNode(fragment.content, true);
+  const filterSelect = filterInstance.querySelector('#filter-select');
+
+  options.forEach((option) => {
+    const optionElement = document.createElement('option');
+    optionElement.setAttribute('value', option.value);
+    optionElement.setAttribute('id', 'filter-option');
+    optionElement.innerHTML = option.text;
+    filterSelect.appendChild(optionElement);
+  });
+
+  filtersList.append(filterInstance);
+};
+
+axios({
+  url: 'https://api.themoviedb.org/3/genre/movie/list',
+  params: {
+    api_key: '6ef8f15c4d654724af2bc133947a5693',
+  },
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8',
+  },
+  method: 'GET',
+}).then((response) => {
+  const genres = response.data.genres.map((genre) => ({ text: genre.name, value: genre.id }));
+  appendFilter(genres);
+}).catch((error) => console.log(error));
+
 axios({
   url: 'https://api.themoviedb.org/3/discover/movie',
   params: {
