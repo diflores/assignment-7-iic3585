@@ -44,3 +44,14 @@ body {
   font-weight: 400;
   font-size: 18px;
 }
+
+#filter-select {
+  padding: 8px;
+  border-radius: 8px;
+  margin-right: 16px;
+  font-size: 16px;
+  font-weight: 300 !important;
+  border: 2px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: white;
+}
