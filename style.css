@@ -27,4 +27,20 @@ body {
 
 #movie-container {
   max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px 0 lightgray;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+#movie-image {
+  width: 180px;
+  margin-bottom: 16px;
+  align-self: center;
+}
+
+#movie-title {
+  font-weight: 400;
+  font-size: 18px;
 }

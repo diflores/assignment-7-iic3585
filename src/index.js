@@ -16,7 +16,7 @@ const appendMovies = (movies) => {
     instance.querySelector('#movie-title').innerHTML = movie.title;
     instance.querySelector('#movie-plot').innerHTML = movie.plot;
     moviesList.appendChild(instance);
-  });  
+  });
 };
 
 axios({
