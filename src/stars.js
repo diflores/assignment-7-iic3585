@@ -188,5 +188,3 @@ export class Rating extends HTMLElement {
     }
   }
 }
-
-window.customElements.define("stars-rating", Rating);

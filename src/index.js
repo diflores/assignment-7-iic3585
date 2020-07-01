@@ -2,6 +2,8 @@ import axios from "axios";
 import { parseResults } from "../utils";
 import { Rating } from './stars'
 
+window.customElements.define("stars-rating", Rating);
+
 let filterValues = {
   genre: "",
   year: "",
