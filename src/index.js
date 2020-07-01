@@ -15,8 +15,6 @@ const appendMovies = movies => {
 
   movies.forEach(movie => {
     const instance = document.importNode(fragment.content, true);
-    const starsFragment = instance.getElementById("stars-template");
-    const starsInstance = document.importNode(starsFragment.content, true);
     instance.querySelector("#movie-image").setAttribute("src", movie.posterURL);
     instance.querySelector("#movie-title").innerHTML = movie.title;
     instance.querySelector("#movie-plot").innerHTML = movie.plot;
